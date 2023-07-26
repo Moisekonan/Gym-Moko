@@ -1,0 +1,23 @@
+{% load static %}
+<!-- Topbar Start -->
+<div class="container-fluid py-3 px-lg-5 d-none d-lg-block">
+    <div class="row">
+        {% if request.user.is_authenticated %}
+        <div class="col-md-6 text-center text-lg-left mb-2 mb-lg-0">
+            <div class="d-inline-flex align-items-center">
+                <a class="text-body pr-3" href="/user_profile/"><i style="color:red" class="fa fa-user mr-2"></i>Mon Profil (<span style="color:red">{{user.first_name|upper}}</span>)</a>
+                <a class="text-body px-3" href="/user_change_password/"><i style="color:red" class="fa fa-unlock-alt mr-2"></i>Changer Mot De Passe</a>
+                <a class="text-body px-3" href="/user_logout/"><i style="color:red" class="fa fa-envelope mr-2"></i>Déconnexion</a>
+            </div>
+        </div>
+        {% else %}
+        <div class="col-md-12 text-center text-lg-right">
+            <div class="d-inline-flex align-items-center">
+                <a class="text-body px-3"  href="/user_login/">
+                    <i style="color:red" class="fa fa-user mr-2"></i>Connexion utilisateur</a>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</div>
+<!-- Topbar End -->

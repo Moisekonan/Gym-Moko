@@ -1,0 +1,280 @@
+{% extends "./base_user.html" %}
+{% load static %}
+
+{% block title %}Accueil{% endblock title %}
+
+
+
+
+{% block content %}
+
+    <!-- ***** Main Banner Area Start ***** -->
+    <div class="main-banner" id="top">
+    <!--    <video autoplay muted loop id="bg-video">-->
+    <!--        <source src="{% static 'assets/images/gym-video.mp4' %}" type="video/mp4"/>-->
+    <!--    </video>-->
+    
+        <img src="{% static 'assets/images/gym123.jpeg' %}" id="bg-video">
+    
+        <div class="video-overlay header-text">
+            <div class="caption">
+                <h6>travailler plus dur, devenir plus fort</h6>
+                <h2>facilement avec <em>Gym-Moko</em></h2>
+                <div class="main-button scroll-to-section">
+                    {% if request.user.is_authenticated%}
+                        <a href="#trainers">Devenir membre</a>
+                    {% else %}
+                        <a href="{% url 'registration' %}">Devenir membre</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ***** Main Banner Area End ***** -->
+    
+    <!-- ***** Features Item Start ***** -->
+    <section class="section" id="features">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 offset-lg-3">
+                    <div class="section-heading">
+                        <h2>QUI NOUS <em>SOMMES</em></h2>
+                        <img src="{% static 'assets/images/line-dec.png' %}" alt="waves">
+                        <p>Bienvenue sur notre site de salle de gym ! Chez <em>Gym-Moko</em>, nous sommes passionnés par la santé, la remise en forme et le bien-être.</p>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <p>
+                         Notre objectif est de créer un environnement motivant et inclusif où chacun peut atteindre ses objectifs personnels de condition physique.
+
+                        Depuis notre ouverture, nous nous engageons à offrir des installations de qualité, des équipements de pointe et des programmes d'entraînement variés pour répondre aux besoins et aux préférences de tous nos membres. Que vous soyez un débutant cherchant à adopter un mode de vie plus actif, un athlète chevronné ou simplement quelqu'un souhaitant maintenir sa forme physique, nous avons tout ce dont vous avez besoin pour réussir.
+                    </p>
+                </div>
+                <div class="col-lg-6">
+                    <p>
+                        Notre équipe de professionnels qualifiés et passionnés est là pour vous guider tout au long de votre parcours. Ils vous fourniront un encadrement personnalisé, des conseils d'experts et une motivation constante pour vous aider à dépasser vos limites et à atteindre vos objectifs. Que ce soit pour perdre du poids, gagner en force, améliorer votre condition cardiovasculaire ou simplement vous sentir mieux dans votre corps, nous sommes là pour vous soutenir à chaque étape.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ***** Features Item End ***** -->
+    
+    
+    <!-- ***** Call to Action Start ***** -->
+    <section class="section" id="call-to-action">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-10 offset-lg-1">
+                    <div class="cta-content">
+                        <h2>NE PAS <em>PENSER</em>, COMMENCEZ DÈS <em>AUJOURD'HUI</em>!</h2>
+                        <p>"La motivation vous permet de commencer. L'habitude vous permet de continuer. Le succès vous permet de persévérer. 
+                            Allez à la salle de gym et créez votre chemin vers un corps plus fort et une vie plus saine !"</p>
+                        <div class="main-button scroll-to-section">
+                            <a href="#trainers">Devenir membre</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ***** Call to Action End ***** -->
+
+
+    
+    <section class="section" id="schedule">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 offset-lg-3">
+                    <div class="section-heading dark-bg">
+                        <h2>CALENDRIER DES <em>COURS</em></h2>
+                        <img src="assets/images/line-dec.png" alt="">
+                        <p>Prêt(e) à faire bouger les choses ? Rejoignez-nous dans notre calendrier de cours de gym et découvrez le pouvoir de la transformation.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="filters">
+                        <ul class="schedule-filter">
+                            <li class="active" data-tsfilter="lundi">Lundi</li>
+                            <li data-tsfilter="mardi">Mardi</li>
+                            <li data-tsfilter="mercredi">Mercredi</li>
+                            <li data-tsfilter="jeudi">Jeudi</li>
+                            <li data-tsfilter="vendredi">Vendredi</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-10 offset-lg-1">
+                    <div class="schedule-table filtering">
+                        <table>
+                            <tbody>
+                            <tr>
+                                <td class="day-time">Cours de fitness</td>
+                                <td class="lundi ts-item show" data-tsmeta="lundi">10:00 - 11:30</td>
+                                <td class="mardi ts-item" data-tsmeta="mardi">14:00 - 15:30</td>
+                                <td>Moko K. konan</td>
+                            </tr>
+                            <tr>
+                                <td class="day-time">Entraînement musculaire</td>
+                                <td class="vendredi ts-item" data-tsmeta="vendredi">10:00 - 11:30</td>
+                                <td class="jeudi vendredi ts-item" data-tsmeta="jeudi" data-tsmeta="vendredi">14:00 -
+                                    15:30
+                                </td>
+                                <td>Diara Z. Moudou</td>
+                            </tr>
+                            <tr>
+                                <td class="day-time">La musculation</td>
+                                <td class="mardi ts-item" data-tsmeta="mardi">10:00 - 11:30</td>
+                                <td class="lundi ts-item show" data-tsmeta="lundi">14:00 - 15:30</td>
+                                <td>Diara Z. Moudou</td>
+                            </tr>
+                            <tr>
+                                <td class="day-time">Cours de formation au yoga</td>
+                                <td class="mercredi ts-item" data-tsmeta="mercredi">10:00 - 11:30</td>
+                                <td class="vendredi ts-item" data-tsmeta="vendredi">14:00 - 15:30</td>
+                                <td>Moko K. konan</td>
+                            </tr>
+                            <tr>
+                                <td class="day-time">Formation approfondie</td>
+                                <td class="jeudi ts-item" data-tsmeta="jeudi">10:00 - 11:30</td>
+                                <td class="mercredi ts-item" data-tsmeta="mercredi">14:00 - 15:30</td>
+                                <td>Diara Z. Moudou</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- ***** Testimonials Starts ***** -->
+    <section class="section" id="trainers">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 offset-lg-3">
+                    <div class="section-heading">
+                        <h2>PLANS DE <em>TARIFICATION</em></h2>
+                        <img src="{% static 'assets/images/line-dec.png' %}" alt="">
+                    </div>
+                </div>
+            </div>
+    
+            <div class="row" >
+                {% for i in package %}
+                    <div class="col-lg-4"><br>
+                        <div class="trainer-item">
+                            <div class="down-content">
+                                <span>{{i.titlename}}</span>
+                                <h4>{{i.price}} Fcfa</h4>
+                                <h4>{{i.packageduration}}</h4>
+                                <p>{{i.description|safe}}</p>
+                                {% if user.is_authenticated %}
+                                    <a class="btn px-3" href="process_payment/" style="background-color: #ed563b;">Réserver maintenant</a> 
+                                    <!--  /apply-booking/{{i.id}}/-->
+                                {% else %}
+                                    <a class="btn px-3" href="user_login/" style="background-color: #ed563b;">Réserver maintenant</a>
+                                {% endif %}
+                                
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+    <!-- ***** Testimonials Ends ***** -->
+    {% block body %}
+    
+    
+    {% endblock %}
+    
+    <!-- ***** Admin Area Ends ***** -->
+    <!-- ***** Admin Area Starts ***** -->
+    <section class="section" id="admin">
+        <h3 class="text-center" style="color: #ed563b;">Connexion administrateur</h3>
+        <hr/>
+        <div class="container-fluid mt-3">
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-xs-12">
+                    <div id="map">
+                        <img src="{% static 'assets/images/adminlogin.jpg' %}" style="width: 100%; height: 349px;">
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-xs-12">
+                    <div class="admin-form">
+                        <form method="post" action="" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <div class="row">
+                                <div class="col-md-12 col-sm-12">
+                                    <fieldset>
+                                        <input type="text" name="uname" placeholder="Entrer Nom Utilisateur" required>
+                                    </fieldset>
+                                </div>
+                                <div class="col-md-12 col-sm-12">
+                                    <fieldset>
+                                        <input type="password" name="pwd" placeholder="Entrer Mot de Passe" required>
+                                    </fieldset>
+                                </div>
+                                <div class="col-lg-12">
+                                    <fieldset>
+                                        <button type="submit" class="main-button">Connexion</button>
+                                    </fieldset>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- ***** Contact Us Area Starts ***** -->
+    <section class="section" id="contact-us">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12 col-md-6 col-xs-12">
+                    <div class="contact-form">
+                        <form id="contact" action="" method="post">
+                            <div class="row">
+                                <div class="col-md-6 col-sm-12">
+                                    <fieldset>
+                                        <input name="name" type="text" id="name" placeholder="Votre Nom*" required="">
+                                    </fieldset>
+                                </div>
+                                <div class="col-md-6 col-sm-12">
+                                    <fieldset>
+                                        <input name="email" type="text" id="email" pattern="[^ @]*@[^ @]*"
+                                               placeholder="Votre Email*" required="">
+                                    </fieldset>
+                                </div>
+                                <div class="col-md-12 col-sm-12">
+                                    <fieldset>
+                                        <input name="subject" type="text" id="subject" placeholder="Sujet">
+                                    </fieldset>
+                                </div>
+                                <div class="col-lg-12">
+                                    <fieldset>
+                                        <textarea name="message" rows="6" id="message" placeholder="Message"
+                                                  required=""></textarea>
+                                    </fieldset>
+                                </div>
+                                <div class="col-lg-12">
+                                    <fieldset>
+                                        <button type="submit" id="form-submit" class="main-button">Envoyer le message</button>
+                                    </fieldset>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ***** Contact Us Area Ends ***** -->
+        
+
+{% endblock content %}
+
+

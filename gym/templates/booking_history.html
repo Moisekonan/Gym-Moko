@@ -1,0 +1,50 @@
+{% extends "./base_user.html" %}
+{% load static %}
+
+{% block title %}
+  Historique Réservations
+{% endblock title %}
+
+{% block content %}
+
+    <section class="section" id="admin">
+        <h3 class="text-center" style="color: #ed563b;">Historique des réservations</h3>
+        <hr/>
+        <div class="table-responsive" align="center">
+                <table id="example" class="table table-striped table-bordered" style="width:80%">
+                    <thead>
+                    <tr>
+                        <th>S.NO</th>
+                        <th>Date De Réservation</th>
+                        <th>Titre</th>
+                        <th>Durée Du Forfait</th>
+                        <th>Prix</th>
+                        <th>Description</th>
+                        <th>Nom De Catégorie</th>
+                        <th>Nom Du Forfait</th>
+                        <th>Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for i in data %}
+                    <tr>
+                        <td>{{forloop.counter}}.</td>
+                        <td>{{i.creationdate}}</td>
+                        <td>{{i.package.titlename}}</td>
+                        <td>{{i.package.packageduration}}</td>
+                        <td>{{i.package.price}} Fcfa.</td>
+                        <td>{{i.package.description|safe}}</td>
+                        <td>{{i.package.category.categoryname}}</td>
+                        <td>{{i.package.packagename}}</td>
+                        <td>
+                            <a href="{% url 'booking_detail' i.id %}">
+                                <button type="button" class="btn btn-primary">Voir les détails</button>
+                            </a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </table>
+    </div>
+    </section>
+
+{% endblock content %}

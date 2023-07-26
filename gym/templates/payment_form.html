@@ -1,0 +1,114 @@
+{% extends "payebase.html" %}
+{% load static %}
+{% block title %}Formulaire de Paiement{% endblock title %}
+{% block style %}
+<style>
+    .StripeElement {
+        box-sizing: border-box;
+        height: 40px;
+        padding: 10px 12px;
+        border: 1px solid transparent;
+        border-radius: 4px;
+        background-color: white;
+        box-shadow: 0 1px 3px 0 #e6ebf1;
+        -webkit-transition: box-shadow 150ms ease;
+        transition: box-shadow 150ms ease;
+    }
+    
+    .StripeElement--focus {
+        box-shadow: 0 1px 3px 0 #cfd7df;
+    }
+    
+    .StripeElement--invalid {
+        border-color: #fa755a;
+    }
+    
+    .StripeElement--webkit-autofill {
+        background-color: #fefde5 !important;
+    }
+</style>
+
+{% endblock style %}
+{% block content %}
+<script src="https://js.stripe.com/v3/"></script>
+<section class='home-banner  relative mt-5'>
+    <div class="container-fluid">
+        <div class="row  d-flex align-items-center justify-content-center">
+            <div class="header-left col-lg-5 col-md-5">
+                <div class="header-left-content">
+                    <h1>ESPACE PAIEMENT</h1>
+                </div>
+                <a href="{% url 'index' %}" style="color: #fa755a;cursor:pointer;"><i class="fa fa-arrow-left mr-1"></i>Retour</a>
+            </div>
+            <div class="header-right col-lg-7 col-md-6 col-sm-8" >
+                <div class="left-img">
+                    <img class="l_img" src="{% static 'assets/images/spay_img.jpg' %}" alt="" style="width: 82%;">
+                </div>
+                <div class="form-wrapper">
+                    <form action="{% url 'process_payment' %}" method="post" id="payment-form">
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="col-md-6">
+                                <input type="text" name="name" value="" class="form-control" placeholder="Nom">
+                            </div>
+                            <div class="col-md-6">
+                                <input type="email" name="email" value="" class="form-control" placeholder="Email">
+                            </div>
+                        </div>
+                        <br>
+                        <div class="">
+                            <input type="text" name="amount" value="" class="form-control" placeholder="Entrer la somme">
+                        </div>
+                        <br>
+                        <div>
+                            <label for="card-element">
+                                NUMÉRO DE CARTE
+                            </label>
+                            <div id="card-element">
+                                <!-- A Stripe Element will be inserted here. -->
+                            </div>
+                            <!-- Used to display form errors. -->
+                            <div id="card-errors" role="alert"></div>
+                        </div>
+                        <hr>
+                        <a href="{% url 'payment_done' pid=some_pid_variable %}"><button type="button" id='pay-btn'>Payer</button></a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock content %}
+
+
+<script src="https://js.stripe.com/v3/"></script>
+<script>
+    // Code JavaScript pour gérer la création de l'élément de carte Stripe et la soumission du formulaire de paiement
+    var stripe = Stripe('pk_test_51NUDhiFYIiKvhLpxSWTmCChKEb1n8z2GJ0umctEGEFgLUbQDuDAxgJ56H3H7iYiovjUnypJHXL83srBBX6U1bFng00wa5vX3kc');
+    var elements = stripe.elements();
+
+    var card = elements.create('card');
+    card.mount('#card-element');
+
+    var form = document.getElementById('payment-form');
+
+    form.addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        stripe.createToken(card).then(function(result) {
+            if (result.error) {
+                var errorElement = document.getElementById('card-errors');
+                errorElement.textContent = result.error.message;
+            } else {
+                // Ajoute le jeton Stripe au formulaire et soumet le formulaire
+                var hiddenInput = document.createElement('input');
+                hiddenInput.setAttribute('type', 'hidden');
+                hiddenInput.setAttribute('name', 'stripeToken');
+                hiddenInput.setAttribute('value', result.token.id);
+                form.appendChild(hiddenInput);
+
+                form.submit();
+            }
+        });
+    });
+</script>

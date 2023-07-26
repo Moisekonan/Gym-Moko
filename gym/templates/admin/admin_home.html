@@ -1,0 +1,189 @@
+{% extends 'admin_base.html' %}
+{% load static %}
+{% block main %}
+
+<!-- Page-header start -->
+<div class="page-header">
+    <div class="page-block">
+        <div class="row align-items-center">
+            <div class="col-md-8">
+                <div class="page-header-title">
+                    <h5 class="m-b-10">Tableau de bord</h5>
+                    <p class="m-b-0">Bienvenue au système de gestion de Gym-Moko</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <ul class="breadcrumb-title">
+                    <li class="breadcrumb-item">
+                        <a href="{% url 'admin_home' %}"> <i class="fa fa-home"></i> </a>
+                    </li>
+                    <li class="breadcrumb-item"><a href="">Tableau de bord</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Page-header end -->
+
+<div class="pcoded-inner-content">
+
+    <div class="main-body">
+        <div class="page-wrapper">
+
+            <div class="page-body">
+                <div class="row">
+
+                    <div class="col-xl-3 col-md-6">
+                        <div class="card">
+                            <div class="card-block">
+                                <div class="row align-items-center">
+                                    <div class="col-12">
+                                        <h4 class="text-c-purple">{{totalcategory}}</h4>
+                                        <h6 class="text-muted m-b-0">Total Categories</h6>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer bg-c-purple">
+                                <div class="row align-items-center">
+                                    <div class="col-9">
+                                        <a class="text-white m-b-0" href="/manageCategory/">Voir les détails</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xl-3 col-md-6">
+                        <div class="card">
+                            <div class="card-block">
+                                <div class="row align-items-center">
+                                    <div class="col-12">
+                                        <h4 class="text-c-green">{{totalpackagetype}}</h4>
+                                        <h6 class="text-muted m-b-0">Total Type De Forfait</h6>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer bg-c-green">
+                                <div class="row align-items-center">
+                                    <div class="col-9">
+                                        <a class="text-white m-b-0" href="/managePackageType/">Voir les détails</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xl-3 col-md-6">
+                        <div class="card">
+                            <div class="card-block">
+                                <div class="row align-items-center">
+                                    <div class="col-12">
+                                        <h4 class="text-c-red">{{totalpackage}}</h4>
+                                        <h6 class="text-muted m-b-0">Total Des Forfaits</h6>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer bg-c-red">
+                                <div class="row align-items-center">
+                                    <div class="col-9">
+                                        <a class="text-white m-b-0" href="/managePackage/">Voir les détails</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xl-3 col-md-6">
+                        <div class="card">
+                            <div class="card-block">
+                                <div class="row align-items-center">
+                                    <div class="col-12">
+                                        <h4 class="text-c-blue">{{totalbooking}}</h4>
+                                        <h6 class="text-muted m-b-0">Total Des Réservations</h6>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer bg-c-blue">
+                                <div class="row align-items-center">
+                                    <div class="col-9">
+                                        <a class="text-white m-b-0" href="/new_booking/?action=Total">Voir les détails</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xl-3 col-md-6">
+                        <div class="card">
+                            <div class="card-block">
+                                <div class="row align-items-center">
+                                    <div class="col-12">
+                                        <h4 class="text-c-purple">{{New.count}}</h4>
+                                        <h6 class="text-muted m-b-0">Nouvelles Réservations</h6>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer bg-c-purple">
+                                <div class="row align-items-center">
+                                    <div class="col-9">
+                                        <a class="text-white m-b-0" href="/new_booking/?action=New">Voir les détails</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xl-3 col-md-6">
+                        <div class="card">
+                            <div class="card-block">
+                                <div class="row align-items-center">
+                                    <div class="col-12">
+                                        <h4 class="text-c-green">{{Partial.count}}</h4>
+                                        <h6 class="text-muted m-b-0">Paiement Partiel Réservation</h6>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer bg-c-green">
+                                <div class="row align-items-center">
+                                    <div class="col-9">
+                                        <a class="text-white m-b-0" href="/new_booking/?action=Partial">Voir les détails</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xl-3 col-md-6">
+                        <div class="card">
+                            <div class="card-block">
+                                <div class="row align-items-center">
+                                    <div class="col-12">
+                                        <h4 class="text-c-red">{{Full.count}}</h4>
+                                        <h6 class="text-muted m-b-0">Paiement Complet Réservation</h6>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer bg-c-red">
+                                <div class="row align-items-center">
+                                    <div class="col-9">
+                                        <a class="text-white m-b-0" href="/new_booking/?action=Full">Voir les détails</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+        <div id="styleSelector"></div>
+    </div>
+</div>
+{% for i in messages %}
+<script>
+alert('{{i}}');
+</script>
+{% endfor %}
+{% endblock %}

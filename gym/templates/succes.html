@@ -1,0 +1,19 @@
+{% extends 'payebase.html' %}
+{% load static %}
+
+{% block content %}
+    <div id="succ_box">
+        <img id="succes-icon" src="{% static 'assets/images/success.png' %}">
+        <h4>Nous vous remercions pour votre paiement : {{amount}}/-</h4>
+        <p>Votre paiement a été réalisé avec succès... </p>
+
+        {% if some_pid_variable %}
+            <a href="{% url 'apply_booking' pid=some_pid_variable %}" class="sbtn btn btn-info" role="button">
+                <i class="fa fa-arrow-left" aria-hidden="true"></i> Retour à la page accueil
+            </a>
+        {% else %}
+            <!-- Handle the case when 'some_pid_variable' is not available or empty -->
+            <p>Retour à la page d'accueil sans lien.</p>
+        {% endif %}
+    </div>
+{% endblock content %}

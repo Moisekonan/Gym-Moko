@@ -1,0 +1,165 @@
+{% extends 'admin_base.html' %}
+{% load static %}
+{% block main %}
+<!-- Page-header start -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdn.ckeditor.com/4.14.1/standard/ckeditor.js"></script>
+<div class="page-header">
+    <div class="page-block">
+        <div class="row align-items-center">
+            <div class="col-md-8">
+                <div class="page-header-title">
+                    <h5 class="m-b-10">Ajouter un forfait</h5>
+                    <p class="m-b-0">Bienvenue au système de gestion de Gym-Moko</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <ul class="breadcrumb-title">
+                    <li class="breadcrumb-item">
+                        <a href="{% url 'admin_home' %}"> <i class="fa fa-home"></i> </a>
+                    </li>
+                    <li class="breadcrumb-item"><a href="">Forfait</a></li>
+                    <li class="breadcrumb-item"><a href="">Ajouter Forfait</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Page-header end -->
+
+<div class="pcoded-inner-content">
+    <!-- Main-body start -->
+    <div class="main-body">
+        <div class="page-wrapper">
+
+            <!-- Page body start -->
+            <div class="page-body">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <!-- Basic Form Inputs card start -->
+                        <div class="card">
+                            <div class="card-block">
+                                <h4 class="sub-title">Ajouter Forfait</h4>
+                                <form method="post" id="ProductForm"
+                                      data-subcategory-url="">
+                                    {% csrf_token %}
+                                    <div class="form-group row">
+
+                                        <div class="col-sm-6">
+                                            <label class="col-form-label">Nom de Categorie</label>
+                                            <select name="category" id="category" class="form-control">
+                                                <option value="">Choisir une catégorie</option>
+                                                {% for i in category %}
+                                                <option value="{{i.id}}">{{i.categoryname}}</option>
+                                                {% endfor %}
+                                            </select>
+                                        </div>
+
+
+                                        <div class="col-sm-6">
+                                            <label class="col-form-label">Type de Forfait</label>
+                                            <select name="packagename" class="form-control">
+                                                <option value="">Choisir un Forfait</option>
+                                                {% for i in mypackage %}
+                                                <option value="{{i.id}}" {% if request.GET.packagename == i.id|lower %}selected{% endif %}>{{i.packagename}}</option>
+                                                {% endfor %}
+                                            </select>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="form-group row">
+
+                                        <div class="col-sm-12">
+                                            <label class="col-form-label">Nom du titre</label>
+                                            <input type="text" name="titlename" class="form-control"
+                                                   placeholder="Entrer Nom Titre" required>
+                                        </div>
+
+
+                                    </div>
+
+                                    <div class="form-group row">
+
+                                        <div class="col-sm-6">
+                                            <label class="col-form-label">Durée</label>
+                                            <input type="text" name="duration" class="form-control"
+                                                   placeholder="Durée" required>
+                                        </div>
+
+                                        <div class="col-sm-6">
+                                            <label class="col-form-label">Prix</label>
+                                            <input type="text" name="price" class="form-control"
+                                                   placeholder="Entrer Prix(en Fcfa)" required>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="form-group row">
+
+                                        <div class="col-sm-12">
+                                            <label class="col-form-label">Description</label>
+                                            <textarea class="form-control" name="description" id="description"
+                                                      required='true'></textarea>
+                                        </div>
+                                        <script>
+                                             CKEDITOR.replace('description');
+                                        </script>
+
+                                    </div>
+
+
+                                    <div class="form-group row">
+
+                                        <div class="col-sm-10">
+                                            <input type="submit" class="btn btn-primary" value="Ajouter">
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Main-body end -->
+    <div id="styleSelector"></div>
+</div>
+
+{% if error == "no" %}
+<script>
+    alert('Le détail du forfait a été ajouté');
+    window.location = ("{% url 'managePackage' %}");
+
+</script>
+{% endif %}
+{% if error == "yes" %}
+<script>
+    alert('Un problème est survenu, veuillez réessayer...');
+
+</script>
+{% endif %}
+
+
+<script>
+    $('#category').change(function(){
+    var url = $('#ProductForm').attr("data-subcategory-url");//get the url of the 'load_category' view
+    var categoryId = $(this).val();//get the selected categoryid from the html input
+
+    $.ajax({    //initialize an AJAX request
+    url:url,     //set the url of the request(localhost:8000/load_subcategory)
+    data:{
+    'category':categoryId //add the categoryid to the get parameters
+    },
+    success:function(data){//data is the return of the 'load_subcategory' view function
+    $('#subcategory').html(data);
+    }
+    });
+    });
+
+</script>
+
+{% endblock %}

@@ -1,0 +1,145 @@
+{% extends "./base_user.html" %}
+{% load static %}
+{% block title %}
+  Mon Profil
+{% endblock title %}
+
+{% block style %}
+<style>
+    .field-icon {
+      float: right;
+      margin-left: -25px;
+      margin-top: -37px;
+      position: relative;
+      background:gray;
+      color:#ed563b;
+      z-index: 2;
+      padding:10px;
+    }
+    
+    .field-icon:hover {
+      cursor:pointer;
+    }
+    </style>
+{% endblock style %}
+
+{% include "./includes/loader.html" %}
+
+{% include "./includes/topnav.html" %}
+
+
+{% include "./includes/navbar.html" %}
+
+
+{% block content %}
+<!-- ***** Admin Area Starts ***** -->
+<section class="section" id="admin">
+    <h3 class="text-center"><a href="{% url 'index' %}" style="color:#ed563b;">Profil de l'utilisateur</a></h3>
+    <hr/>
+    <div class="container-fluid mt-3">
+        <div class="row">
+            <div class="col-lg-6 col-md-6 col-xs-12">
+                <div id="map">
+                    <img src="{% static 'assets/images/adminlogin.jpg' %}" style="width: 100%; height: 560px;">
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6 col-xs-12">
+                <div class="admin-form">
+                    <form method="post" action="" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="col-md-12 col-sm-12">
+                                <fieldset>
+                                    <input type="text" name="firstname" placeholder="Prénom" required value="{{data.user.first_name}}">
+                                </fieldset>
+                            </div>
+                            <div class="col-md-12 col-sm-12">
+                                <fieldset>
+                                    <input type="text" name="secondname" placeholder="Nom" required value="{{data.user.last_name}}">
+                                </fieldset>
+                            </div>
+
+                            <div class="col-md-12 col-sm-12">
+                                <fieldset>
+                                    <input type="password" name="email" id="email" placeholder="Entrer Email" value="{{data.user.username}}" readonly>
+                                    <span class="fa fa-eye field-icon toggle-password-2" id="email-eye" onclick="togglePassword2()"></span>
+                                </fieldset>
+                            </div>
+
+                            <div class="col-md-12 col-sm-12">
+                                <fieldset>
+                                    <input type="password" name="mobile" id="mobile" placeholder="Téléphone" value="{{data.mobile}}" readonly>
+                                    <span class="fa fa-eye field-icon toggle-password" id="mobile-eye" onclick="togglePassword()"></span>
+                                </fieldset>
+                            </div>
+
+                             <div class="col-md-12 col-sm-12">
+                                <fieldset>
+                                    <input type="text" name="address" placeholder="Adresse" value="{{data.address}}" required>
+                                </fieldset>
+                            </div>
+                            <div class="col-lg-12">
+                                <fieldset>
+                                    <button type="submit" class="main-button" href="">Mettre à jour</button>
+                                </fieldset>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% if error == "no" %}
+<script>
+    alert('Connexion réussie');
+    window.location=("{% url 'admin_home' %}");
+</script>
+{% endif %}
+
+{% if error == "yes" %}
+<script>
+    alert('Informations d\'identification non valides, veuillez réessayer');
+</script>
+{% endif %}
+<!-- ***** Admin Area Ends ***** -->
+{% endblock content %}
+
+
+{% include "./includes/footer.html" %}
+
+{% block script %}
+<script>
+    function togglePassword() {
+      var mobileInput = document.getElementById("mobile");
+      var eyeIcon = document.getElementById("mobile-eye");
+      if (mobileInput.type == "password") {
+        eyeIcon.classList.remove("fa-eye");
+        eyeIcon.classList.add("fa-eye-slash");
+        mobileInput.type = "text";
+      } else {
+        eyeIcon.classList.remove("fa-eye-slash");
+        eyeIcon.classList.add("fa-eye");
+        mobileInput.type = "password";
+      }
+    }
+    
+    
+    function togglePassword2() {
+      var emailInput = document.getElementById("email")
+      var eyeIcon = document.getElementById("email-eye");
+      if (emailInput.type == "password") {
+        eyeIcon.classList.remove("fa-eye");
+        eyeIcon.classList.add("fa-eye-slash");
+        emailInput.type = "text";
+      } else {
+        eyeIcon.classList.remove("fa-eye-slash");
+        eyeIcon.classList.add("fa-eye");
+        emailInput.type = "password";
+      }
+    }
+    
+    </script>
+{% endblock script %}
