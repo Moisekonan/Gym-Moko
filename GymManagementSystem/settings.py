@@ -14,7 +14,7 @@ SECRET_KEY = 'ib7jq+u@3&w$flar34(yx%u*lucwj_m--n*6a$^fo(_fh^e&vi'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['moisekonan.pythonanywhere.com']
 
 STRIPE_SECRET_KEY = 'sk_test_51NUDhiFYIiKvhLpxsyJ40gba2XvkpHJWX5OZM2b7PDERMGQr4PvTu5mqOW1QtKqYCYI4ujH4hdP6SdGaKaVDok9U00ryMMKxUW'
 STRIPE_PUBLIC_KEY = 'pk_test_51NUDhiFYIiKvhLpxSWTmCChKEb1n8z2GJ0umctEGEFgLUbQDuDAxgJ56H3H7iYiovjUnypJHXL83srBBX6U1bFng00wa5vX3kc'
