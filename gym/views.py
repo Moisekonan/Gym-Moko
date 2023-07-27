@@ -428,65 +428,65 @@ def apply_booking(request, pid):
     messages.success(request, 'Réservation effectuée')
     return redirect('/')
 
-stripe.api_key = settings.STRIPE_SECRET_KEY
+# stripe.api_key = settings.STRIPE_SECRET_KEY
 
-def create_stripe_token(card_number, expiration_date, cvv):
-    # Configurer la clé d'API Stripe
-    stripe.api_key = settings.STRIPE_SECRET_KEY  # Remplacez par votre propre clé secrète Stripe
+# def create_stripe_token(card_number, expiration_date, cvv):
+#     # Configurer la clé d'API Stripe
+#     stripe.api_key = settings.STRIPE_SECRET_KEY  # Remplacez par votre propre clé secrète Stripe
 
-    # Utiliser Stripe.js pour créer un jeton de carte à partir des informations du formulaire
-    try:
-        token = stripe.Token.create(
-            card={
-                'number': card_number,
-                'exp_month': int(expiration_date.split('/')[0]),
-                'exp_year': int(expiration_date.split('/')[1]),
-                'cvc': cvv,
-            }
-        )
-        return token.id
-    except stripe.error.CardError as e:
-        # Traiter les erreurs éventuelles liées à la carte
-        raise e
+#     # Utiliser Stripe.js pour créer un jeton de carte à partir des informations du formulaire
+#     try:
+#         token = stripe.Token.create(
+#             card={
+#                 'number': card_number,
+#                 'exp_month': int(expiration_date.split('/')[0]),
+#                 'exp_year': int(expiration_date.split('/')[1]),
+#                 'cvc': cvv,
+#             }
+#         )
+#         return token.id
+#     except stripe.error.CardError as e:
+#         # Traiter les erreurs éventuelles liées à la carte
+#         raise e
     
-def payment_done(request,pid):
-    return render(request, 'succes.html', locals())
+# def payment_done(request,pid):
+#     return render(request, 'succes.html', locals())
 
-def payment_view(request):
-    if request.method == 'POST':
-        form = PaymentForm(request.POST)
-        if form.is_valid():
-            # Récupère les données du formulaire de paiement
-            card_number = form.cleaned_data['card_number']
-            expiration_date = form.cleaned_data['expiration_date']
-            cvv = form.cleaned_data['cvv']
-            name = form.cleaned_data['name']
-            email = form.cleaned_data['email']
-            amount = form.cleaned_data['amount']
+# def payment_view(request):
+#     if request.method == 'POST':
+#         form = PaymentForm(request.POST)
+#         if form.is_valid():
+#             # Récupère les données du formulaire de paiement
+#             card_number = form.cleaned_data['card_number']
+#             expiration_date = form.cleaned_data['expiration_date']
+#             cvv = form.cleaned_data['cvv']
+#             name = form.cleaned_data['name']
+#             email = form.cleaned_data['email']
+#             amount = form.cleaned_data['amount']
 
-            # Effectue le paiement avec Stripe
-            try:
-                stripe_token = create_stripe_token(card_number, expiration_date, cvv)
+#             # Effectue le paiement avec Stripe
+#             try:
+#                 stripe_token = create_stripe_token(card_number, expiration_date, cvv)
 
-                charge = stripe.Charge.create(
-                    amount=int(amount * 100),  # Convertit le montant en centimes (Stripe utilise des centimes)
-                    currency='eur',
-                    source=stripe_token,
-                    description='Paiement via Stripe'
-                )
+#                 charge = stripe.Charge.create(
+#                     amount=int(amount * 100),  # Convertit le montant en centimes (Stripe utilise des centimes)
+#                     currency='eur',
+#                     source=stripe_token,
+#                     description='Paiement via Stripe'
+#                 )
 
-                # Enregistre l'historique de paiement dans la base de données
-                booking = Booking.objects.create(user=request.user, date=datetime.now())  # Exemple de création de réservation
-                payment = Paymenthistory(user=request.user, booking=booking, price=amount, status=1)
-                payment.save()
+#                 # Enregistre l'historique de paiement dans la base de données
+#                 booking = Booking.objects.create(user=request.user, date=datetime.now())  # Exemple de création de réservation
+#                 payment = Paymenthistory(user=request.user, booking=booking, price=amount, status=1)
+#                 payment.save()
 
-                return redirect('payment_done', locals)
+#                 return redirect('payment_done', pid=payment.id, amount=amount)
 
-            except stripe.error.CardError as e:
-                error_msg = e.error.message
-                return JsonResponse({'error': error_msg})
+#             except stripe.error.CardError as e:
+#                 error_msg = e.error.message
+#                 return JsonResponse({'error': error_msg})
 
-    else:
-        form = PaymentForm()
+#     else:
+#         form = PaymentForm()
 
-    return render(request, 'payment_form.html', {'form': form})
+#     return render(request, 'payment_form.html', {'form': form})

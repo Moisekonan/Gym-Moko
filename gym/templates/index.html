@@ -171,7 +171,7 @@
                                 <h4>{{i.packageduration}}</h4>
                                 <p>{{i.description|safe}}</p>
                                 {% if user.is_authenticated %}
-                                    <a class="btn px-3" href="process_payment/" style="background-color: #ed563b;">Réserver maintenant</a> 
+                                    <a class="btn px-3" href="/apply-booking/{{i.id}}/" style="background-color: #ed563b;">Réserver maintenant</a> 
                                     <!--  /apply-booking/{{i.id}}/-->
                                 {% else %}
                                     <a class="btn px-3" href="user_login/" style="background-color: #ed563b;">Réserver maintenant</a>

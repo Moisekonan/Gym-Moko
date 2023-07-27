@@ -34,8 +34,8 @@ urlpatterns = [
     path('user_login/',user_login, name="user_login"),
     path('apply-booking/<int:pid>/', apply_booking, name="apply_booking"),
     path('booking_detail/<int:pid>/', booking_detail, name="booking_detail"),
-    path('process_payment/', payment_view, name='process_payment'),
-    path('payment_done/<int:pid>/', payment_done, name='payment_done'),
+    # path('process_payment/', payment_view, name='process_payment'),
+    # path('payment_done/<int:pid>/', payment_done, name='payment_done'),
 ]
 
 if settings.DEBUG:
